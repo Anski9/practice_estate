@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Define an action for viewing property types -->
+    <record id='practice_estate_property_type_action' model='ir.actions.act_window'>
+        <field name='name'>Property types</field>
+        <field name='res_model'>practice.estate.property.type</field>
+        <field name='view_mode'>tree,form</field>
+    </record>
+
+    <!-- Define a tree view for property types -->
+    <record id='practice_estate_property_type_tree_view' model='ir.ui.view'>
+        <field name='name'>practice.estate.property.type.tree</field>
+        <field name='model'>practice.estate.property.type</field>
+        <field name='arch' type='xml'>
+            <tree string='Property Types'>
+                <field name='sequence' widget='handle'/>  <!-- Handle for drag-and-drop sorting -->
+                <field name='name'/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Define a form view for property types -->
+    <record id='practice_estate_property_type_form_view' model='ir.ui.view'>
+        <field name='name'>practice.estate.property.type.form</field>
+        <field name='model'>practice.estate.property.type</field>
+        <field name='arch' type='xml'>
+            <form string='Property type'>
+                <sheet>
+                    <!-- Button to view offers, visible only if there are offers -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name='%(practice_estate_property_offer_action)d'
+                                type='action'
+                                icon='fa-money'
+                                string='Offers'
+                                class='oe_stat_button'
+                                invisible='offer_count == 0'>
+                                <div class="o_field_widget o_stat_info">
+                                </div>
+                            <field name='offer_count' widget='statinfo' string='Offers'/>
+                        </button>
+                    </div>
+                    <!-- Display the property type name in a header -->
+                    <h1 style='margin-bottom: 20px; font-weight: bold;'>
+                        <field name='name'/>
+                    </h1>
+                    <group>
+                        <field name="custom_view_mode" widget="selection"/>
+                    </group>
+                    <!-- Notebook to organize related properties -->
+                    <notebook>
+                        <page string='Questions'>
+                            <!-- Display related properties in a tree view -->
+                            <field name='property_ids'>
+                                <tree string='Properties'>
+                                    <field name='name'/>
+                                    <field name='expected_price'/>
+                                    <field name='state'/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="practice_estate_property_type_action_info" model="ir.actions.act_window">
+        <field name="name">Info</field>
+        <field name="res_model">practice.estate.property.type</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="practice_estate.practice_estate_property_type_form_view_info"/>
+    </record>
+
+    <record id="practice_estate_property_type_form_view_info" model="ir.ui.view">
+        <field name="name">practice.estate.property.type.form.info</field>
+        <field name="model">practice.estate.property.type</field>
+        <field name="arch" type="xml">
+            <form string="Info">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="custom_view_mode" widget="selection"/>
+                       <!-- <button name="action_switch_view"
+                                type="object"
+                                string="Switch view"
+                                class="btn-primary"/> -->
+                    </group>
+                    <notebook>
+                        <page string="Info">
+                            <field name='property_ids'>
+                                <tree string='infos'>
+                                    <field name='name'/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

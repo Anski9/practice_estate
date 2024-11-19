@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Action to open the Tabs view -->
+    <record id="action_practice_estate_tab" model="ir.actions.act_window">
+        <field name="name">Tabs</field>
+        <field name="res_model">practice.estate.tab</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('practice_estate.view_practice_estate_tab_tree')}), 
+                                    (0, 0, {'view_mode': 'form', 'view_id': ref('practice_estate.view_practice_estate_tab_form')})]"/>
+    </record>
+
+    <!-- List View for Tabs -->
+    <record id="view_practice_estate_tab_tree" model="ir.ui.view">
+        <field name="name">practice.estate.tab.tree</field>
+        <field name="model">practice.estate.tab</field>
+        <field name="arch" type="xml">
+            <tree string="Tabs">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Tabs -->
+    <record id="view_practice_estate_tab_form" model="ir.ui.view">
+        <field name="name">practice.estate.tab.form</field>
+        <field name="model">practice.estate.tab</field>
+        <field name="arch" type="xml">
+            <form string="Tab">
+                <header>
+                    <button name="%(action_practice_estate_add_custom_tab)d" 
+                            string="Add Custom Tab" 
+                            type="action" 
+                            class="oe_highlight" 
+                            groups="base.group_user"
+                            context="{'default_name': name}"/>
+                </header>
+                <sheet>
+                    <h1 style="margin-bottom: 20px; font-weight: bold;">
+                        <field name="name"/>
+                    </h1>
+                    <notebook>
+                        <page name="default_page" string="Animals">
+                            <field name="animal_data_ids">
+                                <tree string="Animal Data">
+                                    <field name="question"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

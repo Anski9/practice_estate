@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Action for Add Custom Tab button -->
+    <record id="action_practice_estate_add_custom_tab" model="ir.actions.act_window">
+        <field name="name">Add Custom Tab</field>
+        <field name="res_model">practice.estate.tab</field>
+        <field name="view_mode">form</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Form View for Add Custom Tab -->
+    <record id="view_practice_estate_tab_add_custom_form" model="ir.ui.view">
+        <field name="name">practice.estate.tab.add.custom.form</field>
+        <field name="model">practice.estate.tab</field>
+        <field name="arch" type="xml">
+            <form string="Add Custom Tab for">
+                <sheet>
+                    <group>
+                        <field name="label" placeholder="Tab name" required="1"/>
+                        <!-- <field name="groups" widget="many2many_tags" string="User Groups"/> -->
+                        <field name="sh_position" widget="selection"/>
+                        <field name="tab_list" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="create_tab" string="Create Tab" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

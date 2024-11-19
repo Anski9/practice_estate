@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Define a view inheritance for the res.users form view -->
+    <record id='res_users_form_view_inherit_property' model='ir.ui.view'>
+        <field name='name'>res.users.form.inherit.property</field>
+        <field name='model'>res.users</field>
+        <field name='inherit_id' ref='base.view_users_form'/>
+        <field name='arch' type='xml'>
+            <!-- Insert a new page inside the notebook element -->
+            <xpath expr='//notebook' position='inside'>
+                <page string='Real estate properties'>
+                    <!-- Display the property_ids field as a one2many widget, read-only -->
+                    <field name='property_ids' widget='one2many' readonly='1'/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

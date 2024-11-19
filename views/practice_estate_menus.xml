@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Root menu for Real Estate module -->
+    <menuitem 
+        id='practice_estate_root_menu' 
+        name='Real Estate'
+        sequence='10'
+    />
+    <!-- Submenu for Advertisements under Real Estate -->
+    <menuitem
+        id='practice_estate_properties_menu'
+        name='Advertisements' 
+        parent='practice_estate_root_menu'
+        sequence='10'
+    />
+    <!-- Action menu for listing properties under Advertisements -->
+    <menuitem 
+        id='practice_estate_properties_action_menu' 
+        action='practice_estate_property_action' 
+        parent='practice_estate_properties_menu'
+        sequence='10'
+    />
+    <!-- Submenu for Settings under Real Estate -->
+    <menuitem
+        id='practice_estate_property_type_menu'
+        name='Settings'
+        parent='practice_estate_root_menu'
+    />
+    <!-- Action menu for listing property types under Settings -->
+    <menuitem
+        id='practice_estate_property_type_action_menu'
+        action='practice_estate_property_type_action'
+        parent='practice_estate_property_type_menu'
+    />
+    <!-- Action menu for listing property tags under Settings -->
+    <menuitem
+        id='practice_estate_property_tag_menu'
+        action='practice_estate_property_tag_action'
+        parent='practice_estate_property_type_menu'
+    />
+    <!-- Tabs menu under Settings -->
+    <menuitem
+        id='practice_estate_tab_menu'
+        name='Tabs'
+        action='action_practice_estate_tab'
+        parent='practice_estate_property_type_menu'
+    />
+</odoo>
