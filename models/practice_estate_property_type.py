@@ -26,6 +26,22 @@ class PracticeEstatePropertyType(models.Model):  # Creating a new model for the 
         store=True
     )
 
+    # Filtered properties with fixed logic
+    filtered_property_ids = fields.One2many(
+        'practice.estate.property',
+        'property_type_id',
+        compute='_compute_filtered_property_ids',
+        store=False,
+        string='Filtered Questions',
+    )
+
+    @api.depends('property_ids')
+    def _compute_filtered_property_ids(self):
+        for record in self:
+            record.filtered_property_ids = record.property_ids.filtered(
+                lambda p: p.expected_price >= 100
+            )
+
 
     custom_view_mode = fields.Selection(
         [('questions', 'Questions'), ('info', 'Info')],

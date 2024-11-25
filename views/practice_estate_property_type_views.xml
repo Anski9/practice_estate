@@ -26,6 +26,9 @@
         <field name='arch' type='xml'>
             <form string='Property type'>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <field name="property_ids" widget="many2many_tags"/>
+                    </div>
                     <!-- Button to view offers, visible only if there are offers -->
                     <div class="oe_button_box" name="button_box">
                         <button name='%(practice_estate_property_offer_action)d'
@@ -50,8 +53,8 @@
                     <notebook>
                         <page string='Questions'>
                             <!-- Display related properties in a tree view -->
-                            <field name='property_ids'>
-                                <tree string='Properties'>
+                            <field name="filtered_property_ids">
+                                <tree>
                                     <field name='name'/>
                                     <field name='expected_price'/>
                                     <field name='state'/>
@@ -63,6 +66,26 @@
             </form>
         </field>
     </record>
+
+    <!-- <record id="practice_estate_property_type_search_view" model="ir.ui.view">
+        <field name="name">practice.estate.property.type.search</field>
+        <field name="model">practice.estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Search price">
+                <field name="expected_price" filter_domain="[('expected_price', '>=', self)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_practice_estate_property_type_search" model="ir.actions.act_window">
+        <field name="name">Search price</field>
+        <field name="res_model">practice.estate.property</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="practice_estate_property_type_search_view"/>
+    </record> -->
+
+
+
 
     <record id="practice_estate_property_type_action_info" model="ir.actions.act_window">
         <field name="name">Info</field>
