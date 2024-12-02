@@ -26,21 +26,44 @@ class PracticeEstatePropertyType(models.Model):  # Creating a new model for the 
         store=True
     )
 
+
     # Filtered properties with fixed logic
     filtered_property_ids = fields.One2many(
         'practice.estate.property',
         'property_type_id',
-        compute='_compute_filtered_property_ids',
-        store=False,
+        #compute='_compute_filtered_property_ids',
+        store=True,
         string='Filtered Questions',
     )
 
-    @api.depends('property_ids')
+    filter_criteria_ids = fields.One2many(
+        'property.filter.criteria',
+        'property_type_id',
+        string='Filter criteria'
+    )
+ 
+    @api.depends('property_ids', 'filter_criteria_ids')
     def _compute_filtered_property_ids(self):
         for record in self:
-            record.filtered_property_ids = record.property_ids.filtered(
-                lambda p: p.expected_price >= 100
-            )
+            filtered_records = record.property_ids
+            for criteria in record.filter_criteria_ids:
+                field_name = criteria.field_name
+                operator = criteria.operator
+                value = eval(criteria.value) if criteria.value.isdigit() else criteria.value
+                filtered_records = filtered_records.filtered(
+                    lambda r: eval(f"r.{field_name} {operator} {value}")
+                )
+            record.filtered_property_ids = filtered_records
+
+
+
+
+    # @api.depends('property_ids')
+    # def _compute_filtered_property_ids(self):
+    #     for record in self:
+    #         record.filtered_property_ids = record.property_ids.filtered(
+    #             lambda p: p.expected_price >= 100
+    #         )
 
 
     custom_view_mode = fields.Selection(

@@ -5,3 +5,5 @@ from . import practice_estate_property_offer
 from . import practice_estate_property_resusers
 from . import practice_estate_tab
 from . import practice_estate_animal_data
+from . import property_filter_criteria
+from . import filter_updater

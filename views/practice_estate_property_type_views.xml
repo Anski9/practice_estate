@@ -53,8 +53,17 @@
                     <notebook>
                         <page string='Questions'>
                             <!-- Display related properties in a tree view -->
-                            <field name="filtered_property_ids">
-                                <tree>
+                            <div><strong>New offers</strong></div>
+                            <field name="property_ids" context="{'default_state': 'new'}" domain="[('state', '=', 'new')]">
+                                <tree editable="bottom">
+                                    <field name='name'/>
+                                    <field name='expected_price'/>
+                                    <field name='state'/>
+                                </tree>
+                            </field>
+                            <div><strong>Received offer</strong></div>
+                            <field name="property_ids" context="{'default_state': 'offer_received'}" domain="[('state', '=', 'offer_received')]">
+                                <tree editable="bottom">
                                     <field name='name'/>
                                     <field name='expected_price'/>
                                     <field name='state'/>

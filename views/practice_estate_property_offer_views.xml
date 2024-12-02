@@ -23,8 +23,8 @@
                 <field name='status' invisible='1' nolabel='True'/>
                 <field name='property_type_id' invisible='1' nolabel='True'/>
                 <!-- Buttons to accept or refuse offers, hidden if already accepted or refused -->
-                <button name='action_accept' type='object' icon='fa-check' help='Accept' invisible="status == 'accepted' or status == 'refused'"/>
-                <button name='action_refuse' type='object' icon='fa-close' help='Refuse' invisible="status == 'accepted' or status == 'refused'"/>
+                <button name='action_accept' type='object' icon='fa-check' help='Accept' invisible="status == 'accepted' or status == 'refused'" title="Accept"/>
+                <button name='action_refuse' type='object' icon='fa-close' help='Refuse' invisible="status == 'accepted' or status == 'refused'" title="Refuce"/>
             </tree>
         </field>
     </record>

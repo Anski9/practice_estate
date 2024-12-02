@@ -21,7 +21,12 @@
             'practice_estate/static/src/js/view_mode_switch.js',
             'practice_estate/static/src/js/test_script.js',
         ],
+        'web.assets_backend': [
+            'practice_estate/static/src/js/filtering.js',
+        ]
     },
     'installable': True,
     'application': True,
+    'auto_install': False,
+    #'post_init_hook': 'update_filter_criteria',
 }
